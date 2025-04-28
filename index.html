@@ -236,6 +236,33 @@
   <div id="app" class="container">
     <h1>Interactive Summer Projects Timeline</h1>
     
+   
+    
+    <div class="timeline">
+      <div class="timeline-header">
+        <div class="month" v-for="month in months">{{ month }}</div>
+      </div>
+      
+      <div class="timeline-events">
+        <div class="event" v-for="event in events" :key="event.id">
+          <div class="event-name">{{ truncateTitle(event.title) }}</div>
+          <div class="event-bar-container">
+            <div 
+              class="event-bar" 
+              :style="getEventStyle(event)"
+              @click="editEvent(event)"
+              @mouseover="showTooltip($event, event)"
+              @mouseout="hideTooltip"
+            >
+              {{ getEventDateLabel(event) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tooltip" ref="tooltip"></div>
+    </div>
+
     <div class="controls">
       <h2>{{ editMode ? 'Edit Event' : 'Add New Event' }}</h2>
       <div class="form-row">
@@ -274,31 +301,6 @@
           <button v-if="editMode" @click="cancelEdit" class="btn-danger" style="margin-left: 10px;">Cancel</button>
         </div>
       </div>
-    </div>
-    
-    <div class="timeline">
-      <div class="timeline-header">
-        <div class="month" v-for="month in months">{{ month }}</div>
-      </div>
-      
-      <div class="timeline-events">
-        <div class="event" v-for="event in events" :key="event.id">
-          <div class="event-name">{{ truncateTitle(event.title) }}</div>
-          <div class="event-bar-container">
-            <div 
-              class="event-bar" 
-              :style="getEventStyle(event)"
-              @click="editEvent(event)"
-              @mouseover="showTooltip($event, event)"
-              @mouseout="hideTooltip"
-            >
-              {{ getEventDateLabel(event) }}
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="tooltip" ref="tooltip"></div>
     </div>
     
     <div class="events-list">
