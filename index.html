@@ -25,7 +25,7 @@
     }
     
     .container {
-      max-width: 1200px;
+      /* max-width: 1200px; */
       margin: 0 auto;
     }
     
@@ -124,17 +124,22 @@
       margin-bottom: 15px;
       position: relative;
       align-items: center;
+      flex-wrap: wrap; /* Allow wrapping of child elements */
     }
     
     .event-name {
-      width: 150px;
+      flex: 0 0 auto; /* Prevent shrinking */
+      max-width: 150px; /* Optional: Limit the width */
       padding-right: 15px;
       font-weight: bold;
       text-align: right;
+      white-space: normal; /* Allow text to wrap */
+      word-wrap: break-word; /* Break long words if necessary */
+      overflow-wrap: break-word; /* For better compatibility */
     }
     
     .event-bar-container {
-      flex: 1;
+      flex: 1; /* Take up remaining space */
       height: 40px;
       position: relative;
     }
@@ -496,12 +501,16 @@
         };
         
         // Truncate long titles
+        // const truncateTitle = (title) => {
+        //   if (title.length > 20) {
+        //     return title.substring(0, 18) + '...';
+        //   }
+        //   return title;
+        // };
+
         const truncateTitle = (title) => {
-          if (title.length > 20) {
-            return title.substring(0, 18) + '...';
-          }
-          return title;
-        };
+  return title; // Always return the full title
+};
         
         // Load initial data
         onMounted(() => {
